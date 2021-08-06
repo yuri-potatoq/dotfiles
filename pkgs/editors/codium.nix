@@ -20,7 +20,6 @@
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
         "nix.enableLanguageServer" = true;
-        "editor.fontFamily" = "IBM Plex Mono";
       };
       extensions = with pkgs.vscode-extensions; [
         # Theme
