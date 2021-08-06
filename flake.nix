@@ -1,5 +1,5 @@
 {
-    decription = "My Nix Entrypoint";
+    description = "My Nix Entrypoint";
 
     inputs = {
         home-manager.url = "github:nix-community/home-manager";
