@@ -6,18 +6,13 @@
     };
 
     outputs = { self, nixpkgs, home-manager }: {
-
-        nixosConfigurations.desktop = nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            modules = [
-                ./pkgs/home.nix
-
-                home-manager.nixosModules.home-manager
-            ];
+        homeConfigurations = {
+            main = home-manager.lib.homeManagerConfiguration {
+                configuration = ./pkgs/home.nix;
+                system = "x86_64-linux";
+                homeDirectory = "/home/potatoq";
+                username = "potatoq";
+            };       
         };
-        packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-        defaultPackage.x86_64-linux = self.packages.x86_64-linux.hello;
-
     };
 }

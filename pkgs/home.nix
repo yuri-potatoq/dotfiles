@@ -2,21 +2,22 @@
 
 {
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.potatoq = {
-    imports = [
-      ./editos/codium.nix
+  imports = [
+      ./editors/codium.nix
       # ./editos/vim.nix
 
       # TODO: ....
-    ];
+  ];
+  # home-manager.useUserPackages = true;
+  # home-manager.useGlobalPkgs = true;
+  # home-manager.users.potatoq = {
+    
 
-  programs.home-manager.enable = true;
+  #   programs.home-manager.enable = true;
 
-  home.username = "potatoq";
-  home.homeDirectory = "/home/potatoq"; 
+  #   home.username = "potatoq";
+  #   home.homeDirectory = "/home/potatoq"; 
 
-  home.stateVersion = "21.11";
-
+  #   home.stateVersion = "21.11";
+  # };
 }

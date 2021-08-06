@@ -1,13 +1,14 @@
-{pkgs, ...};
+{pkgs, ...}:
 
- programs = {
+{
+  programs = {
     vscode = {
       enable = true;
       package = pkgs.vscodium;
       userSettings = {
         # auto update tags when edited
         "editor.linkedEditing" = true;
-        "editor.rulers" = [ 71 79 ];
+        "editor.rulers" = [ 72 79 ];
         "editor.formatOnSave" = true;
 
         "workbench.colorTheme" = "GitHub Dark";
@@ -51,3 +52,4 @@
       ];
     };
   };
+}
