@@ -10,8 +10,7 @@
   ];
   # home-manager.useUserPackages = true;
   # home-manager.useGlobalPkgs = true;
-  # home-manager.users.potatoq = {
-    
+  # home-manager.users.potatoq = {    
 
   #   programs.home-manager.enable = true;
 
