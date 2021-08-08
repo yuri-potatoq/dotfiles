@@ -8,7 +8,7 @@
     outputs = { self, nixpkgs, home-manager }: {
         homeConfigurations = {
             main = home-manager.lib.homeManagerConfiguration {
-                configuration = ./home-manager/home.nix;
+                configuration = ./pkgs/home.nix;
                 system = "x86_64-linux";
                 homeDirectory = "/home/potatoq";
                 username = "potatoq";
