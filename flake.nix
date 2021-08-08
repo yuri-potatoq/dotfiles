@@ -12,7 +12,8 @@
                 system = "x86_64-linux";
                 homeDirectory = "/home/potatoq";
                 username = "potatoq";
-            };       
+
+            };
         };
     };
 }
