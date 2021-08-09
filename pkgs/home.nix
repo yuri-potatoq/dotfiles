@@ -7,7 +7,7 @@
       # ./editos/vim.nix
 
       ./programs/docker.nix
-      ./programs/haskell.nix
+      ./programs/langs.nix
       ./programs/bash.nix
 
       # TODO: ....

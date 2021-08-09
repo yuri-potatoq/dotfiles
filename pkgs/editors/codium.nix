@@ -51,6 +51,10 @@
 
         # Haskell
         haskell.haskell
+        justusadam.language-haskell
+
+        # Ocaml
+        ocamllabs.ocaml-platform
 
         # Markdown
         foam.foam-vscode
