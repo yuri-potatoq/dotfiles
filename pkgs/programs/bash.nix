@@ -15,6 +15,19 @@ in
     fzf
   ];
 
+  # home.file.".bash_profile".source = pkgs.writeShellScript "bash_profile" ''
+  #   # nix shell      
+  #   if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
+  #     . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh'; 
+  #   fi
+
+  #   # include .profile if it exists
+  #   [[ -f ~/.profile ]] && . ~/.profile
+
+  #   # include .bashrc if it exists
+  #   [[ -f ~/.bashrc ]] && . ~/.bashrc
+  # '';
+
   programs.bash = {
     enable = true;
     historySize = 10000;
@@ -45,10 +58,28 @@ in
       set -o vi
       bind -m vi-insert 'Control-l: clear-screen'
 
+      # User specific environment
+      if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+      then
+          PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+      fi
+      export PATH
+
+      # User specific aliases and functions
+      if [ -d ~/.bashrc.d ]; then
+        for rc in ~/.bashrc.d/*; do
+          if [ -f "$rc" ]; then
+            . "$rc"
+          fi
+        done
+      fi
+
+      unset rc
+
       # --- Complete aliases ---
-      . ${complete-alias}/complete_alias
-      complete -F _complete_alias $( \
-        alias | perl -lne 'print "$1 " if /^alias ([^=]*)=/' )
+      # . ${complete-alias}/complete_alias
+      # complete -F _complete_alias $( \
+      #   alias | perl -lne 'print "$1 " if /^alias ([^=]*)=/' )
 
       # --- Tab completion ---
       . ${tab-completion}/bash/fzf-bash-completion.sh
@@ -83,6 +114,13 @@ in
           PS1+=$YELLOW$NIX_SHELL_PROMPT
         fi
 
+        # nix path
+        if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
+          . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh';
+        fi
+
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
         # TODO: Don't output nothing on the branch slot if not in a branch
         PS1+='$(echo -ne " $BLUE\w $RED$(git_branch) $YELLOW>$GREEN>$RED> $RESET")'
       }
@@ -96,6 +134,9 @@ in
       export LESS_TERMCAP_so=$'\e[01;33m'
       export LESS_TERMCAP_ue=$'\e[0m'
       export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+      # rust/cargo
+      . "$HOME/.cargo/env"
     '';
 
     historyControl = [
