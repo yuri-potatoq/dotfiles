@@ -14,7 +14,7 @@
         "editor.renderControlCharacters" = true;
 
         "files.autoSave" = "afterDelay";
-        "files.autoSaveDelay" = 0;
+        "files.autoSaveDelay" = 1;
         
         "workbench.colorTheme" = "GitHub Dark";
         "workbench.iconTheme" = "material-icon-theme";
