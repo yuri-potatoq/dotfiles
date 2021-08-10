@@ -54,10 +54,6 @@ in
       # --- GPG ---
       export GPG_TTY=$(tty)
 
-      # --- Vi mode ---
-      set -o vi
-      bind -m vi-insert 'Control-l: clear-screen'
-
       # User specific environment
       if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
       then
@@ -76,14 +72,14 @@ in
 
       unset rc
 
-      # --- Complete aliases ---
+      # # --- Complete aliases ---
       # . ${complete-alias}/complete_alias
       # complete -F _complete_alias $( \
       #   alias | perl -lne 'print "$1 " if /^alias ([^=]*)=/' )
 
-      # --- Tab completion ---
-      . ${tab-completion}/bash/fzf-bash-completion.sh
-      bind -x '"\t": fzf_bash_completion'
+      # # --- Tab completion ---
+      # . ${tab-completion}/bash/fzf-bash-completion.sh
+      # bind -x '"\t": fzf_bash_completion'
 
       # --- Set bash prompt ---
 
@@ -150,6 +146,7 @@ in
       b = "cd -";
       se = "sudoedit";
       ns = "nix-shell -p";
+      ll = "ls -aHl";
     };
 
     # TODO: These don't get loaded when using a display manager.
