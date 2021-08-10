@@ -61,26 +61,6 @@ in
       fi
       export PATH
 
-      # User specific aliases and functions
-      if [ -d ~/.bashrc.d ]; then
-        for rc in ~/.bashrc.d/*; do
-          if [ -f "$rc" ]; then
-            . "$rc"
-          fi
-        done
-      fi
-
-      unset rc
-
-      # # --- Complete aliases ---
-      # . ${complete-alias}/complete_alias
-      # complete -F _complete_alias $( \
-      #   alias | perl -lne 'print "$1 " if /^alias ([^=]*)=/' )
-
-      # # --- Tab completion ---
-      # . ${tab-completion}/bash/fzf-bash-completion.sh
-      # bind -x '"\t": fzf_bash_completion'
-
       # --- Set bash prompt ---
 
       git_branch() {
