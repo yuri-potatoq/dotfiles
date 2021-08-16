@@ -46,9 +46,6 @@
         # Python
         ms-python.python
 
-        # Rust
-        matklad.rust-analyzer
-
         # Haskell
         haskell.haskell
         justusadam.language-haskell
@@ -56,6 +53,9 @@
         # Ocaml
         ocamllabs.ocaml-platform
 
+        # Rust 
+        matklad.rust-analyzer
+        
         # Markdown
         foam.foam-vscode
         svsool.markdown-memo

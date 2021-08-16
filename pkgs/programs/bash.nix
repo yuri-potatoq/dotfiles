@@ -113,6 +113,10 @@ in
 
       # rust/cargo
       . "$HOME/.cargo/env"
+
+      # go path
+      export GOPATH=$(go env GOTPATH)
+      export PATH=$PATH:$GOPATH
     '';
 
     historyControl = [
