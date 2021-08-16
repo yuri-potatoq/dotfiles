@@ -115,7 +115,7 @@ in
       . "$HOME/.cargo/env"
 
       # go path
-      export GOPATH=$(go env GOTPATH)
+      export GOPATH=$(go env GOPATH)
       export PATH=$PATH:$GOPATH
     '';
 
