@@ -116,7 +116,7 @@ in
 
       # go path
       export GOPATH=$(go env GOPATH)
-      export PATH=$PATH:$GOPATH
+      export PATH=$PATH:$GOPATH/bin
     '';
 
     historyControl = [
