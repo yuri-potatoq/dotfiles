@@ -15,6 +15,8 @@ in
     fzf
   ];
 
+  programs.fzf.enable = true;
+
   # home.file.".bash_profile".source = pkgs.writeShellScript "bash_profile" ''
   #   # nix shell      
   #   if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
@@ -112,7 +114,9 @@ in
       export LESS_TERMCAP_us=$'\e[1;4;31m'
 
       # rust/cargo
-      . "$HOME/.cargo/env"
+      if [ -e $HOME/.cargo/env ] ; then
+        . "$HOME/.cargo/env"
+      fi
 
       # go path
       export GOPATH=$(go env GOPATH)

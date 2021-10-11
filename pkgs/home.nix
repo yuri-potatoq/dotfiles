@@ -2,15 +2,15 @@
 
 {
   imports = [
-      ./editors/codium.nix
-      # ./editos/vim.nix
+    ./editors/codium.nix
+    ./editors/nvim.nix
 
-      ./programs/langs.nix
-      ./programs/bash.nix
+    ./programs/langs.nix
+    ./programs/bash.nix
 
-      # TODO: ....
+    # TODO: ....
   ];
-  
+
   programs = {
     bash.enable = true;
     home-manager.enable = true;

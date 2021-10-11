@@ -1,9 +1,9 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 
 {
   programs = {
     vscode = {
-      enable = true;
+      enable = false;
       package = pkgs.vscodium;
       userSettings = {
         # auto update tags when edited
@@ -15,7 +15,7 @@
 
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 1;
-        
+
         "workbench.colorTheme" = "GitHub Dark";
         "workbench.iconTheme" = "material-icon-theme";
 
@@ -55,7 +55,7 @@
 
         # Rust 
         matklad.rust-analyzer
-        
+
         # Markdown
         foam.foam-vscode
         svsool.markdown-memo

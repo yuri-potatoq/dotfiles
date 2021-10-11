@@ -1,15 +1,15 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 
 {
-    home.packages = with pkgs ; [
-        # Haskell
-        ghc
-        stack
-        cabal-install
+  home.packages = with pkgs ; [
+    # Haskell
+    ghc
+    stack
+    cabal-install
 
-        # Ocaml
-        opam
-        ocaml
-        # ocaml-nox
-    ];
+    # Ocaml
+    opam
+    ocaml
+    # ocaml-nox
+  ];
 }
