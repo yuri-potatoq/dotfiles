@@ -3,7 +3,7 @@
 {
   programs = {
     vscode = {
-      enable = false;
+      enable = true;
       package = pkgs.vscodium;
       userSettings = {
         # auto update tags when edited

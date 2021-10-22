@@ -18,7 +18,7 @@
     ];
 
     extraConfig = '' 
-    	colorscheme noctu
+      colorscheme noctu
         set rnu
         set nu
 
