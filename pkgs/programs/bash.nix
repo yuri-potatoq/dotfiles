@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   complete-alias = builtins.fetchGit {
@@ -30,6 +30,29 @@ in
   #   [[ -f ~/.bashrc ]] && . ~/.bashrc
   # '';
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+      format = lib.concatStrings [
+        "$directory"
+        "$git_branch"
+        "$git_status"
+        "$nix_shell"
+        "$time"
+        "$line_break"
+        "$status"
+        "$character"
+      ];
+      nix_shell = {
+        symbol = "❄️ ";
+      };
+      time = {
+        disabled = false;
+      };
+    };
+  };
+
   programs.bash = {
     enable = true;
     historySize = 10000;
@@ -53,74 +76,12 @@ in
     ];
 
     initExtra = ''
-      # --- GPG ---
-      export GPG_TTY=$(tty)
-
-      # User specific environment
-      if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-      then
-          PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-      fi
-      export PATH
-
-      # --- Set bash prompt ---
-
-      git_branch() {
-        git branch 2>/dev/null | grep '^*' | colrm 1 2
-      }
-
-      # Set Colors
-      BLUE='\001\033[01;34m\002'
-      YELLOW='\001\033[01;33m\002'
-      RED='\001\033[01;31m\002'
-      GREEN='\001\033[01;32m\002'
-      RESET='\001\033[00m\002'
-
-      # Use PROMPT_COMMAND to get Return Status
-      function prompt_command {
-
-        RET=$?
-        if [[ $RET -ne 0 ]]; then
-          PS1=$RED$RET
-        else
-          PS1=$GREEN$RET
-        fi
-
-        # Add to prompt if in IN_NIX_SHELL
-        NIX_SHELL_PROMPT=' ns'
-        if [[ -n "$IN_NIX_SHELL" ]]; then
-          PS1+=$YELLOW$NIX_SHELL_PROMPT
-        fi
-
-        # nix path
-        if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
-          . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh';
-        fi
-
-        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
-        # TODO: Don't output nothing on the branch slot if not in a branch
-        PS1+='$(echo -ne " $BLUE\w $RED$(git_branch) $YELLOW>$GREEN>$RED> $RESET")'
-      }
-      PROMPT_COMMAND=prompt_command
-
-      # Colored man pages
-      export LESS_TERMCAP_mb=$'\e[1;32m'
-      export LESS_TERMCAP_md=$'\e[1;32m'
-      export LESS_TERMCAP_me=$'\e[0m'
-      export LESS_TERMCAP_se=$'\e[0m'
-      export LESS_TERMCAP_so=$'\e[01;33m'
-      export LESS_TERMCAP_ue=$'\e[0m'
-      export LESS_TERMCAP_us=$'\e[1;4;31m'
-
-      # rust/cargo
-      if [ -e $HOME/.cargo/env ] ; then
-        . "$HOME/.cargo/env"
+      # nix path
+      if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
+        . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh';
       fi
 
-      # go path
-      export GOPATH=$(go env GOPATH)
-      export PATH=$PATH:$GOPATH/bin
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
 
     historyControl = [
