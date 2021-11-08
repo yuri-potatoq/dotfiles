@@ -77,8 +77,8 @@ in
 
     initExtra = ''
       # nix path
-      if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
-        . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh';
+      if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then 
+        . '~/.nix-profile/etc/profile.d/nix.sh';
       fi
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
