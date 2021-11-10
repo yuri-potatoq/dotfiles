@@ -7,15 +7,22 @@
   };
 
   outputs = { self, nixpkgs, home-manager }:
-    let pkgs = import nixpkgs { system = "x86_64-linux"; }; in
+    let 
+      pkgs = import nixpkgs { 
+        system = "x86_64-linux"; 
+        config.allowUnfree = true;
+      }; 
+      username = "potatoq";
+    in
     {
       homeConfigurations = {
-        potatoq = home-manager.lib.homeManagerConfiguration {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
+          inherit username;
+
           configuration = ./pkgs/home.nix;
           system = "x86_64-linux";
-          homeDirectory = "/home/potatoq";
-          username = "potatoq";
-
+          homeDirectory = "/home/${username}";
+          
           extraSpecialArgs = {
             inherit pkgs;
           };

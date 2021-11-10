@@ -7,6 +7,7 @@
 
     ./programs/langs.nix
     ./programs/bash.nix
+    ./programs/third-party.nix
 
     # TODO: ....
   ];
