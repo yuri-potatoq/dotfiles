@@ -15,20 +15,10 @@ in
     fzf
   ];
 
-  programs.fzf.enable = true;
-
-  # home.file.".bash_profile".source = pkgs.writeShellScript "bash_profile" ''
-  #   # nix shell      
-  #   if [ -e /home/potatoq/.nix-profile/etc/profile.d/nix.sh ]; then 
-  #     . '/home/potatoq/.nix-profile/etc/profile.d/nix.sh'; 
-  #   fi
-
-  #   # include .profile if it exists
-  #   [[ -f ~/.profile ]] && . ~/.profile
-
-  #   # include .bashrc if it exists
-  #   [[ -f ~/.bashrc ]] && . ~/.bashrc
-  # '';
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
 
   programs.starship = {
     enable = true;
@@ -38,6 +28,17 @@ in
         "$directory"
         "$git_branch"
         "$git_status"
+
+        # langs
+        "$python"
+        "$rust"
+        "$golang"
+        "$kotlin"
+        "$nodejs"
+        "$ocaml"
+        "$java"
+
+        "$docker_context"
         "$nix_shell"
         "$time"
         "$line_break"
@@ -53,56 +54,82 @@ in
     };
   };
 
-  programs.bash = {
-    enable = true;
-    historySize = 10000;
-    shellOptions = [
-      # Auto cd to directories
-      "autocd"
+  programs = {
+    bash = {
+      enable = true;
+      historySize = 10000;
+      shellOptions = [
+        # Auto cd to directories
+        "autocd"
 
-      # Append to history file rather than replacing it.
-      "histappend"
+        # Append to history file rather than replacing it.
+        "histappend"
 
-      # check the window size after each command and, if
-      # necessary, update the values of LINES and COLUMNS.
-      "checkwinsize"
+        # check the window size after each command and, if
+        # necessary, update the values of LINES and COLUMNS.
+        "checkwinsize"
 
-      # Extended globbing.
-      "extglob"
-      "globstar"
+        # Extended globbing.
+        "extglob"
+        "globstar"
 
-      # Warn if closing shell with running jobs.
-      "checkjobs"
-    ];
+        # Warn if closing shell with running jobs.
+        "checkjobs"
+      ];
 
-    initExtra = ''
-      # nix path
-      if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then 
-        . ~/.nix-profile/etc/profile.d/nix.sh;
-      fi
+      historyControl = [
+        "erasedups"
+        "ignoredups"
+        "ignorespace"
+      ];
 
-      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-    '';
+      shellAliases = {
+        c = "clear";
+        b = "cd -";
+        se = "sudoedit";
+        ns = "nix-shell -p";
+        ll = "ls -aHl";
+      };
 
-    historyControl = [
-      "erasedups"
-      "ignoredups"
-      "ignorespace"
-    ];
+      # TODO: These don't get loaded when using a display manager.
+      # workaround: Link ~/.profile to ~/.xprofile
+      sessionVariables = {
+        EDITOR = "vim";
+        FZF_DEFAULT_OPTS = ''--prompt \" λ \"'';
+      };
 
-    shellAliases = {
-      c = "clear";
-      b = "cd -";
-      se = "sudoedit";
-      ns = "nix-shell -p";
-      ll = "ls -aHl";
+      profileExtra = builtins.readFile ./.profile;
     };
 
-    # TODO: These don't get loaded when using a display manager.
-    # workaround: Link ~/.profile to ~/.xprofile
-    sessionVariables = {
-      EDITOR = "vim";
-      FZF_DEFAULT_OPTS = ''--prompt \" λ \"'';
+    git = {
+      enable = true;
+      package = pkgs.gitFull;
+
+      userName = "Yuri Lemos Rodrigues";
+      userEmail = "yuri.ylr@outlook.com";
+
+      delta = {
+        enable = true;
+        options = {
+          features = "side-by-side line-numbers decorations";
+          syntax-theme = "GitHub";
+          decorations = {
+            commit-decoration-style = "bold yellow box ul";
+            file-style = "bold yellow ul";
+            file-decoration-style = "none";
+            hunk-header-decoration-style = "cyan box ul";
+          };
+          delta = {
+            navigate = true;
+          };
+          line-numbers = {
+            line-numbers-left-style = "cyan";
+            line-numbers-right-style = "cyan";
+            line-numbers-minus-style = 124;
+            line-numbers-plus-style = 28;
+          };
+        };
+      };
     };
   };
 }

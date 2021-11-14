@@ -15,5 +15,8 @@
 
       # misc
       bitwarden
+
+      # browser
+      google-chrome
     ] ++ jetbrains-ides;
 }

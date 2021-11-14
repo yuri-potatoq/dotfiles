@@ -7,11 +7,11 @@
   };
 
   outputs = { self, nixpkgs, home-manager }:
-    let 
-      pkgs = import nixpkgs { 
-        system = "x86_64-linux"; 
+    let
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
         config.allowUnfree = true;
-      }; 
+      };
       username = "potatoq";
     in
     {
@@ -22,7 +22,7 @@
           configuration = ./pkgs/home.nix;
           system = "x86_64-linux";
           homeDirectory = "/home/${username}";
-          
+
           extraSpecialArgs = {
             inherit pkgs;
           };
