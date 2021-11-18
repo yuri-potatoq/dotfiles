@@ -13,6 +13,7 @@ in
 {
   home.packages = with pkgs ; [
     fzf
+    tree
   ];
 
   programs.fzf = {
