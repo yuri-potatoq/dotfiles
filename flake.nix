@@ -26,8 +26,9 @@
           extraSpecialArgs = {
             inherit pkgs;
           };
-
         };
       };
+
+      templates = import ./templates;
     };
 }

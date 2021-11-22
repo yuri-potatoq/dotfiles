@@ -90,6 +90,9 @@ in
         se = "sudoedit";
         ns = "nix-shell -p";
         ll = "ls -aHl";
+        nix-fmt = ''
+          nix-shell -p nixpkgs-fmt --run "nixpkgs-fmt ."
+        '';
       };
 
       # TODO: These don't get loaded when using a display manager.
