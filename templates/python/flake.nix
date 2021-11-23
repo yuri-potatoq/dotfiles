@@ -17,8 +17,8 @@
           # pipenv
           python3Packages.poetry
           python3Packages.ipython
-          mypy
-          # nodePackages.pyright
+          vscode-extensions.ms-python.python
+          nodePackages.pyright
         ];
       in
       rec {
@@ -28,8 +28,8 @@
         };
 
         defaultPackage = with pkgs.poetry2nix; mkPoetryApplication {
-            projectDir = ./.;
-            preferWheels = true;
+          projectDir = ./.;
+          preferWheels = true;
         };
       });
 }
