@@ -14,8 +14,9 @@
           inherit system;
         };
         tools = with pkgs; [
-          pipenv
-          python39Packages.ipython
+          # pipenv
+          python3Packages.poetry
+          python3Packages.ipython
           mypy
           # nodePackages.pyright
         ];
@@ -24,6 +25,11 @@
         # `nix develop`
         devShell = with pkgs; mkShell {
           buildInputs = [ python3 ] ++ tools;
+        };
+
+        defaultPackage = with pkgs.poetry2nix; mkPoetryApplication {
+            projectDir = ./.;
+            preferWheels = true;
         };
       });
 }
