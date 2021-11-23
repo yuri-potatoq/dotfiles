@@ -14,10 +14,10 @@
           inherit system;
         };
         tools = with pkgs; [
-            pipenv
-            python39Packages.ipython
-            mypy
-            # nodePackages.pyright
+          pipenv
+          python39Packages.ipython
+          mypy
+          # nodePackages.pyright
         ];
       in
       rec {
