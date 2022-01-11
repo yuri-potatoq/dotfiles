@@ -16,6 +16,13 @@ in
     tree
   ];
 
+  # tmux config
+  programs.tmux = {
+    enable = true; 
+    # shortcut = ".";   
+    extraConfig = builtins.readFile ./.tmux.conf;
+  };
+
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
