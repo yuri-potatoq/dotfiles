@@ -19,7 +19,7 @@ in
   # tmux config
   programs.tmux = {
     enable = true; 
-    # shortcut = ".";   
+    shortcut = "aa";   
     extraConfig = builtins.readFile ./.tmux.conf;
   };
 
@@ -107,6 +107,7 @@ in
       sessionVariables = {
         EDITOR = "vim";
         FZF_DEFAULT_OPTS = ''--prompt \" λ \"'';
+        TERM = "xterm-256color";
       };
 
       profileExtra = builtins.readFile ./.profile;
