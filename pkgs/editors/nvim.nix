@@ -19,21 +19,21 @@
 
     extraConfig = '' 
       colorscheme noctu
-        set rnu
-        set nu
+      set rnu
+      set nu
 
-        " key bindings
+      " key bindings
 
-        nnoremap <space> <nop>
+      nnoremap <space> <nop>
 
-        let mapleader=" "
+      let mapleader=" "
 
-        " Find files using Telescope command-line sugar.
+      " Find files using Telescope command-line sugar.
 
-        nnoremap <leader>ff <cmd>Telescope find_files<cr>
-        nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-        nnoremap <leader>fb <cmd>Telescope buffers<cr>
-        nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-        '';
+      nnoremap <leader>ff <cmd>Telescope find_files<cr>
+      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+      nnoremap <leader>fb <cmd>Telescope buffers<cr>
+      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+    '';
   };
 }

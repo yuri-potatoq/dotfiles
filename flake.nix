@@ -17,10 +17,9 @@
     {
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
-          inherit username;
+          inherit username system;
 
           configuration = ./pkgs/home.nix;
-          system = "x86_64-linux";
           homeDirectory = "/home/${username}";
 
           extraSpecialArgs = {
