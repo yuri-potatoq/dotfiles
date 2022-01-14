@@ -19,8 +19,11 @@ in
   # tmux config
   programs.tmux = {
     enable = true; 
-    shortcut = "aa";   
-    extraConfig = builtins.readFile ./.tmux.conf;
+    extraConfig = builtins.readFile ./tmux.conf;
+    prefix = "C-a";
+    plugins = with pkgs; [
+      tmuxPlugins.resurrect
+    ];
   };
 
   programs.fzf = {
