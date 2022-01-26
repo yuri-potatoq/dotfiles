@@ -11,9 +11,16 @@ let
   };
 in
 {
+  fonts.fontconfig = {
+    enable = true;
+  };
+
   home.packages = with pkgs ; [
     fzf
     tree
+
+    # apply customized font
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" ]; })
   ];
 
   # tmux config
@@ -59,6 +66,7 @@ in
       nix_shell = {
         symbol = "❄️ ";
       };
+      
       time = {
         disabled = false;
       };
