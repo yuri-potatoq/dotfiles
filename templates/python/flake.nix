@@ -19,6 +19,7 @@
           (python3.withPackages (ps: with ps; [
             poetry
             ipython
+            pytest
           ]))
         ];
       in
