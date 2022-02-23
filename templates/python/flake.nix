@@ -14,6 +14,8 @@
           inherit system;
         };
         tools = with pkgs; [
+          gnumake
+
           python3Packages.poetry
           python3Packages.ipython
           python3Packages.ipython
