@@ -1,4 +1,4 @@
-from ..src import __version__
+from src import __version__
 
 
 def test_check_version(*args):

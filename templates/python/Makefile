@@ -1,2 +1,2 @@
-test: which pytest
+test: $(which pytest)
 	pytest -vv ./tests
