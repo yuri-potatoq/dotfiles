@@ -15,18 +15,18 @@
         };
         tools = with pkgs; [
           gnumake
-
-          python3Packages.poetry
-          python3Packages.ipython
-          python3Packages.ipython
-          vscode-extensions.ms-python.python
-          nodePackages.pyright
+                    
+          (python3.withPackages (ps: with ps; [
+            poetry
+            ipython
+            ipytho
+          ]));
         ];
       in
       rec {
         # `nix develop`
         devShell = with pkgs; mkShell {
-          buildInputs = [ python3 ] ++ tools;
+          buildInputs = tools;
         };
 
         defaultPackage = with pkgs.poetry2nix; mkPoetryApplication {
