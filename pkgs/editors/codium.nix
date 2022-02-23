@@ -45,6 +45,7 @@
 
         # Python
         ms-python.python
+        ms-pyright.pyright
 
         # Haskell
         haskell.haskell
