@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -16,4 +16,6 @@
     bash.enable = true;
     home-manager.enable = true;
   };
+
+  # nix.registry.nixpkgs.flake = inputs.nixpkgs;
 }

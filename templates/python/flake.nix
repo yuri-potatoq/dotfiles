@@ -14,8 +14,8 @@
           inherit system;
         };
         tools = with pkgs; [
-          # pipenv
           python3Packages.poetry
+          python3Packages.ipython
           python3Packages.ipython
           vscode-extensions.ms-python.python
           nodePackages.pyright

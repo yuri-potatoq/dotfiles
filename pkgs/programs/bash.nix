@@ -66,7 +66,11 @@ in
       nix_shell = {
         symbol = "❄️ ";
       };
-      
+
+      git_branch = {
+        symbol = "🌱 ";
+      };
+
       time = {
         disabled = false;
       };
