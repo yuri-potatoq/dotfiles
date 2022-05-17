@@ -9,16 +9,23 @@ let
     url = "https://github.com/lincheney/fzf-tab-completion";
     rev = "53eb325f573265a6105c9bd0aa56cd865c4e14b7";
   };
+  fzf-pods = pkgs.callPackage ./fzf-pods.nix { inherit pkgs; };
 in
 {
   fonts.fontconfig = {
     enable = true;
-  };
+  }; 
 
   home.packages = with pkgs ; [
     fzf
     tree
 
+    # cloud cli
+    awscli2
+    kubectl
+    google-cloud-sdk    
+    fzf-pods
+    
     # apply customized font
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" ]; })
   ];
