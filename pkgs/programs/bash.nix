@@ -26,6 +26,9 @@ in
     google-cloud-sdk    
     fzf-pods
     
+    # dev
+    python3Packages.ipython
+
     # apply customized font
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" ]; })
   ];
