@@ -2,10 +2,11 @@
 
 {
   imports = [
+    # editors
     ./editors/codium.nix
     ./editors/nvim.nix
 
-    ./programs/langs.nix
+    # ./programs/langs.nix
     ./programs/bash.nix
     ./programs/third-party.nix
 
