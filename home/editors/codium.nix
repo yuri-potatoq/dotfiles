@@ -30,6 +30,7 @@
 
         "nix.enableLanguageServer" = true;
       };
+      
       extensions = with pkgs.vscode-extensions; [
         # Theme
         github.github-vscode-theme

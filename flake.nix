@@ -18,13 +18,20 @@
     {
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
-          inherit username system;
+          inherit pkgs;
 
-          configuration = ./pkgs/home.nix;
-          homeDirectory = "/home/${username}";
+          modules = [
+            ./home/home.nix
+
+            ({ pkgs, ... }: {
+              home.packages = with pkgs; [
+                (callPackage ./pkgs/fzf-pods.nix { inherit pkgs; })
+              ];
+            })
+          ];
 
           extraSpecialArgs = {
-            inherit pkgs;
+            inherit inputs pkgs username;
           };
         };
       };
