@@ -6,7 +6,6 @@
     ./editors/codium.nix
     ./editors/nvim.nix
 
-    ./programs/langs.nix    
     ./programs/third-party.nix
 
     # cli

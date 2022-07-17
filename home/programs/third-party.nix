@@ -18,5 +18,7 @@
 
       # browser
       google-chrome
+
+      #
     ] ++ jetbrains-ides;
 }
