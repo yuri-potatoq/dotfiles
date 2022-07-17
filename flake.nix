@@ -4,13 +4,16 @@
   inputs = {
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    polymc.url = "github:PolyMC/PolyMC";
   };
 
-  outputs = { self, nixpkgs, home-manager }@inputs :
+  outputs = { self, nixpkgs, home-manager, ... }@inputs :
     let
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        nixpkgs.overlays = [ inputs.polymc.overlay ];
       };
       system = "x86_64-linux";
       username = "potatoq";
@@ -35,7 +38,6 @@
           };
         };
       };
-
       templates = import ./templates;
     };
 }

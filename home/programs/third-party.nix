@@ -5,7 +5,7 @@
     let
       jetbrains-ides = with pkgs.jetbrains; [
         idea-community
-        # pycharm-community
+        pycharm-community
       ];
     in
     with pkgs; [
@@ -19,6 +19,7 @@
       # browser
       google-chrome
 
-      #
+      # minecraft launcher
+      polymc
     ] ++ jetbrains-ides;
 }
