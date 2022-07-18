@@ -24,4 +24,5 @@
   };
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.package = pkgs.nixUnstable;
 }

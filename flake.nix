@@ -5,7 +5,8 @@
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    polymc.url = "github:PolyMC/PolyMC";
+    # polymc.url = "github:PolyMC/PolyMC";
+    polymc.url = "github:virchau13/PolyMC/fix-non-nixos-libraries";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs :
@@ -13,7 +14,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        nixpkgs.overlays = [ inputs.polymc.overlay ];
+        overlays = [ inputs.polymc.overlay ];
       };
       system = "x86_64-linux";
       username = "potatoq";
