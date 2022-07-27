@@ -5,8 +5,7 @@
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # polymc.url = "github:PolyMC/PolyMC";
-    polymc.url = "github:virchau13/PolyMC/fix-non-nixos-libraries";
+    polymc.url = "github:PolyMC/PolyMC";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs :

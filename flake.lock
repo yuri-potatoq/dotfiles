@@ -69,11 +69,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1658015103,
-        "narHash": "sha256-mO+23f3SO+fBzEvbxRe6GkSB5Xp43CT2sV8Rs8MYdz8=",
+        "lastModified": 1658161305,
+        "narHash": "sha256-X/nhnMCa1Wx4YapsspyAs6QYz6T/85FofrI6NpdPDHg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8f485713f5e6b6883a9b6959afa98688360a3ecb",
+        "rev": "e4d49de45a3b5dbcb881656b4e3986e666141ea9",
         "type": "github"
       },
       "original": {
@@ -106,16 +106,15 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1658138295,
-        "narHash": "sha256-3LAMmP9gRTd4LiWeBpL0IoL2G+w8xtKKTIs4kwivZd8=",
-        "owner": "virchau13",
+        "lastModified": 1658240888,
+        "narHash": "sha256-Y9SwjKxscuwfkkW6sIcJOHl/AajBlA58+qaazOBqoDk=",
+        "owner": "PolyMC",
         "repo": "PolyMC",
-        "rev": "9bc3a2ff88d1398a4b17b7caedf4d359cc516fa2",
+        "rev": "c86610b917d2935426c0813bead01b610b913fae",
         "type": "github"
       },
       "original": {
-        "owner": "virchau13",
-        "ref": "fix-non-nixos-libraries",
+        "owner": "PolyMC",
         "repo": "PolyMC",
         "type": "github"
       }

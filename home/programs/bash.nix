@@ -123,6 +123,9 @@ in
         nix-fmt = ''
           nix-shell -p nixpkgs-fmt --run "nixpkgs-fmt ."
         '';
+        ni = ''
+          nix-shell -p nix-info --run "nix-info -m"
+        '';
       };
 
       # TODO: These don't get loaded when using a display manager.
