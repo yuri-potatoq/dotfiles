@@ -13,7 +13,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        nixpkgs.overlays = [ inputs.polymc.overlay ];
+        overlays = [ inputs.polymc.overlay ];
       };
       system = "x86_64-linux";
       username = "potatoq";
