@@ -18,6 +18,7 @@ in
   home.packages = with pkgs ; [
     fzf
     tree
+    entr
 
     # cloud cli
     awscli2
