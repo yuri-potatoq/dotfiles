@@ -16,4 +16,9 @@
     description = "Python Project Template";
     path = ./python;
   };
-}
+
+  ocaml = {
+    description = "Ocaml Project Template";
+    path = ./ocaml;
+  };
+ }
