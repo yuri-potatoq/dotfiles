@@ -4,7 +4,7 @@
   imports = [
     # editors
     ./editors/codium.nix
-    ./editors/nvim.nix
+    ./editors/nvim/default.nix
 
     ./programs/third-party.nix
 
