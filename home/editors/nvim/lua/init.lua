@@ -11,6 +11,7 @@ table.insert(runtime_path, 'lua/?/init.lua')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+
 -- All servers are installed by Nix
 local servers = {
     { name = 'gopls', opts = {} },
@@ -61,6 +62,10 @@ map{'<leader>fg', '<cmd>Telescope live_grep<cr>', 'n', { noremap=true, silent=tr
 map{'<leader>fb', '<cmd>Telescope buffers<cr>', 'n', { noremap=true, silent=true }}
 map{'<leader>fh', '<cmd>Telescope help_tags<cr>', 'n', { noremap=true, silent=true }}
 
+-- File tree
+map{'<leader>tt', '<cmd>NvimTreeToggle<cr>', 'n', { noremap=true, silent=true }}
+-- --
 
-
+require("nvim-tree").setup()
+require("nvim-web-devicons").setup()
 require('completion')

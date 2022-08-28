@@ -42,6 +42,10 @@
       cmp-emoji
       luasnip
       cmp_luasnip
+
+      # File tree
+      nvim-tree-lua
+      nvim-web-devicons
     ];
 
     extraConfig = ''
