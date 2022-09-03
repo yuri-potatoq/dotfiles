@@ -53,7 +53,7 @@ end
 
 
 
--- -- keys
+-- -- key bindings
 
 -- Find files using Telescope command-line sugar.
 
@@ -64,7 +64,11 @@ map{'<leader>fh', '<cmd>Telescope help_tags<cr>', 'n', { noremap=true, silent=tr
 
 -- File tree
 map{'<leader>tt', '<cmd>NvimTreeToggle<cr>', 'n', { noremap=true, silent=true }}
--- --
+
+-- -- Edit
+map{'<C-S>', ':update<cr>', 'n', {noremap=true, silent=true}}
+map{'<C-S>', '<Esc>:update<cr>gi', 'i', {noremap=true, silent=false}}
+
 
 require("nvim-tree").setup()
 require("nvim-web-devicons").setup()

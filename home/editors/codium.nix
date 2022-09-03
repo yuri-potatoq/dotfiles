@@ -67,6 +67,9 @@
         eamodio.gitlens
         esbenp.prettier-vscode
         ms-vsliveshare.vsliveshare
+
+        ionide.ionide-fsharp
+        ms-dotnettools.csharp
       ];
     };
   };
