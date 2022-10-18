@@ -6,6 +6,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     polymc.url = "github:PolyMC/PolyMC";
+
+    emacs = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixDoomEmacs = {
+      url = "github:nix-community/nix-doom-emacs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs :
@@ -13,7 +22,10 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ inputs.polymc.overlay ];
+        overlays = [ 
+          inputs.polymc.overlay
+          inputs.emacs.overlay
+        ];
       };
       system = "x86_64-linux";
       username = "potatoq";

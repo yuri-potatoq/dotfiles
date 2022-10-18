@@ -68,8 +68,15 @@ map{'<leader>tt', '<cmd>NvimTreeToggle<cr>', 'n', { noremap=true, silent=true }}
 -- -- Edit
 map{'<C-S>', ':update<cr>', 'n', {noremap=true, silent=true}}
 map{'<C-S>', '<Esc>:update<cr>gi', 'i', {noremap=true, silent=false}}
+map{'<C-u>', '<cmd>vim.lsp.buf.code_action<CR>', 'n', {noremap=true, silent=true}}
+map{'<C-k>', '<cmd>vim.lsp.buf.signature_help<CR>', 'i', {noremap=true, silent=true}}
+map{'[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', 'n', {noremap=true, silent=true}}
+map{']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', 'n', {noremap=true, silent=true}}
 
+-- map{'<buffer> <expr><C-f>', 'lsp#scroll(+4)', 'i', {noremap=true, silent=true}}
+-- map{'<buffer> <expr><C-d>', 'lsp#scroll(-4)', 'i', {noremap=true, silent=true}}
 
 require("nvim-tree").setup()
 require("nvim-web-devicons").setup()
 require('completion')
+require('rust-tools').setup()

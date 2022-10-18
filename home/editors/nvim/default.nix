@@ -30,6 +30,7 @@
 
       # lsp
       nvim-lspconfig
+      rust-tools-nvim
 
       # Completion
       nvim-cmp

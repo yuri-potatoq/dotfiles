@@ -19,6 +19,8 @@ in
     fzf
     tree
     entr
+    fd
+    ripgrep
 
     # cloud cli
     awscli2

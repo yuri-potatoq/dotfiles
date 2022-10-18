@@ -70,6 +70,9 @@
 
         ionide.ionide-fsharp
         ms-dotnettools.csharp
+
+        # elixir
+        elixir-lsp.vscode-elixir-ls
       ];
     };
   };
