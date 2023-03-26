@@ -2,7 +2,7 @@
   description = "My little potato flake";
 
   inputs = {
-    home-manager.url = "github:nix-community/home-manager";
+    homeManager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     polymc.url = "github:PolyMC/PolyMC";
@@ -17,7 +17,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs :
+  outputs = { self, nixpkgs, homeManager, ... }@inputs :
     let
       pkgs = import nixpkgs {
         inherit system;
@@ -32,7 +32,7 @@
     in
     {
       homeConfigurations = {
-        "${username}" = home-manager.lib.homeManagerConfiguration {
+        "${username}" = homeManager.lib.homeManagerConfiguration {
           inherit pkgs;
 
           modules = [
