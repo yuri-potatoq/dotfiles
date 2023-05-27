@@ -7,14 +7,14 @@
 
     polymc.url = "github:PolyMC/PolyMC";
 
-    emacs = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # emacs = {
+    #   url = "github:nix-community/emacs-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    nixDoomEmacs = {
-      url = "github:nix-community/nix-doom-emacs";
-    };
+    # nixDoomEmacs = {
+    #   url = "github:nix-community/nix-doom-emacs";
+    # };
   };
 
   outputs = { self, nixpkgs, homeManager, ... }@inputs :
@@ -24,7 +24,7 @@
         config.allowUnfree = true;
         overlays = [ 
           inputs.polymc.overlay
-          inputs.emacs.overlay
+          # inputs.emacs.overlay
         ];
       };
       system = "x86_64-linux";

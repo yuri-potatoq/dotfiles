@@ -5,7 +5,8 @@
     # editors
     ./editors/codium.nix
     ./editors/nvim
-    ./editors/emacs
+    ./editors/helix
+    # ./editors/emacs
 
     ./programs/third-party.nix
 

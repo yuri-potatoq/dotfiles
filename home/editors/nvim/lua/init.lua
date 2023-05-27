@@ -8,8 +8,8 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities
 
 
 -- All servers are installed by Nix
@@ -73,6 +73,19 @@ map{'<C-u>', ':lua vim.lsp.buf.code_action()<CR>', 'n', {noremap=true, silent=tr
 map{'<C-k>', ':lua vim.lsp.buf.signature_help<CR>', 'i', {noremap=true, silent=true}}
 map{'[d', ':lua vim.lsp.diagnostic.goto_prev()<CR>', 'n', {noremap=true, silent=true}}
 map{']d', ':lua vim.lsp.diagnostic.goto_next()<CR>', 'n', {noremap=true, silent=true}}
+
+-- map{'<A-j>', ':m .+1<CR>==', 'n', {noremap=true, silent=true} }
+-- map{'<A-k>', ':m .-2<CR>==', 'n', {noremap=true, silent=true} }
+-- map{'<A-j>', '<ESC>:m .+1<CR>==gi ', 'i', {noremap=true, silent=true} }
+-- map{'<A-k>', '<ESC>:m .-2<CR>==gi ', 'i', {noremap=true, silent=true} }
+-- map{'<A-j>', ":m '>+1<CR>gv=gv", 'v', {noremap=true, silent=true} }
+-- map{'<A-k>', ":m '<-2<CR>gv=gv", 'v', {noremap=true, silent=true} }
+--
+-- inoremap <A-j> <Esc>:m .+1<CR>==gi
+-- inoremap <A-k> <Esc>:m .-2<CR>==gi
+-- vnoremap <A-j> :m '>+1<CR>gv=gv
+-- vnoremap <A-k> :m '<-2<CR>gv=gv
+
 
 -- map{'<buffer> <expr><C-f>', 'lsp#scroll(+4)', 'i', {noremap=true, silent=true}}
 -- map{'<buffer> <expr><C-d>', 'lsp#scroll(-4)', 'i', {noremap=true, silent=true}}
