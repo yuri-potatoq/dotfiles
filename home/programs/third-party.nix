@@ -11,15 +11,11 @@
     with pkgs; [
       # chat
       discord
-      slack
 
       # misc
       bitwarden
 
       # browser
       google-chrome
-
-      # minecraft launcher
-      polymc
     ] ++ jetbrains-ides;
 }
