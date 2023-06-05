@@ -8,7 +8,7 @@
     # ./editors/helix
     ./editors/emacs
 
-    # ./programs/third-party.nix
+    ./programs/third-party.nix
 
     # cli
     ./programs/bash.nix

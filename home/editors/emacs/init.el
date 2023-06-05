@@ -1,16 +1,13 @@
-;; always ensure that use-package will download the needed packages
-(setq use-package-always-ensure t)
-
-(setq package-archives
-    '(( "gnu"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/" )
-    ( "org-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/" )
-    ( "melpa"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/" )))
-
-
 ;; eval use-package as fast as possible
 (eval-when-compile
   (require 'use-package))
+  
+;; disable impure packages
+(setq package-archives nil
+      package-enable-at-startup nil)
 
+;; always ensure that use-package will download the needed packages
+(setq use-package-always-ensure t)
 
 ;; git stuff
 (use-package magit
@@ -21,10 +18,6 @@
   (use-package magit-todos
     :defer t
     :hook (magit-mode . magit-todos-mode)))
-
-;;
-(require 'which-key)
-(which-key-mode)
 
 ;; Enable Evil
 (require 'evil)
@@ -43,6 +36,7 @@
 
 
 ;; lsp java setup
+(use-package lsp-java)
 ;; (use-package lsp-java :config (add-hook 'java-mode-hook 'lsp))
 
 ;; (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
@@ -52,6 +46,5 @@
 ;; go-lsp setup
 (add-hook 'go-mode-hook #'lsp)
 
-;; (lsp-mode . lsp-enable-which-key-integration)
 
 

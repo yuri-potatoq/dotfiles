@@ -17,5 +17,7 @@
 
       # browser
       google-chrome
+
+      prismlauncher
     ] ++ jetbrains-ides;
 }
