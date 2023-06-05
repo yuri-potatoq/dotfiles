@@ -10,14 +10,7 @@ let
     config = ./init.el;
     alwaysEnsure = true;
     package = pkgs.emacsUnstable;
-    extraEmacsPackages = epkgs: with epkgs; [
-      evil
-      evil-leader
-      evil-collection
-      
-      lsp-mode
-      lsp-java
-    ];
+    extraEmacsPackages = epkgs: with epkgs; [ ];
   };
 in
 {
