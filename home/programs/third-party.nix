@@ -4,8 +4,10 @@
   home.packages =
     let
       jetbrains-ides = with pkgs.jetbrains; [
-        idea-community
-        pycharm-community
+        idea-ultimate
+        rider
+        goland
+        pycharm-professional
       ];
     in
     with pkgs; [
