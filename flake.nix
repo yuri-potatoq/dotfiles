@@ -5,16 +5,10 @@
     homeManager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    polymc.url = "github:PolyMC/PolyMC";
-
-    # emacs = {
-    #   url = "github:nix-community/emacs-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # nixDoomEmacs = {
-    #   url = "github:nix-community/nix-doom-emacs";
-    # };
+    emacs = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, homeManager, ... }@inputs :
@@ -22,9 +16,8 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ 
-          inputs.polymc.overlay
-          # inputs.emacs.overlay
+        overlays = [
+          inputs.emacs.overlay
         ];
       };
       system = "x86_64-linux";

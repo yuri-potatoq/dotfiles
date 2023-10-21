@@ -4,14 +4,15 @@
   home.packages =
     let
       jetbrains-ides = with pkgs.jetbrains; [
-        idea-community
-        pycharm-community
+        idea-ultimate
+        rider
+        goland
+        pycharm-professional
       ];
     in
     with pkgs; [
       # chat
       discord
-      slack
 
       # misc
       bitwarden
@@ -19,7 +20,6 @@
       # browser
       google-chrome
 
-      # minecraft launcher
-      polymc
+      prismlauncher
     ] ++ jetbrains-ides;
 }
