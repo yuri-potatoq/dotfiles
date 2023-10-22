@@ -1,5 +1,6 @@
 { pkgs, config, ...}:
 {
+  # ref: https://beb.ninja/post/installing-podman/
   config.home.packages = with pkgs; [
     podman
     runc
