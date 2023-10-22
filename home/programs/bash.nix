@@ -139,7 +139,13 @@ in
         TERM = "xterm-256color";
       };
 
-      profileExtra = builtins.readFile ./.profile;
+      # profileExtra = builtins.readFile ./.profile;
+      profileExtra = ''
+        [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && . $HOME/.nix-profile/etc/profile.d/nix.sh
+
+        # useful for showing icons on non-NixOS systems
+        export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
+      '';
     };
 
   };

@@ -20,6 +20,6 @@
       # browser
       google-chrome
 
-      prismlauncher
+#      prismlauncher
     ] ++ jetbrains-ides;
 }

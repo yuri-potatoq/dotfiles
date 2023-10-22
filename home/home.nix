@@ -9,6 +9,7 @@
     #./editors/emacs
 
     ./programs/third-party.nix
+    ./programs/podman.nix
 
     # cli
     ./programs/bash.nix
@@ -23,6 +24,7 @@
   programs = {
     bash.enable = true;
     home-manager.enable = true;
+    git.enable = true;
   };
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
