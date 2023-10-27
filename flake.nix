@@ -34,6 +34,7 @@
             ({ pkgs, ... }: {
               home.packages = with pkgs; [
                 (callPackage ./pkgs/fzf-pods.nix { inherit pkgs; })
+                (callPackage ./pkgs/discord-krisp-patch.nix { inherit pkgs; })
               ];
             })
           ];

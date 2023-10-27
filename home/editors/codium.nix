@@ -45,8 +45,8 @@
         golang.go
 
         # Python
-        ms-python.python
-        ms-pyright.pyright
+        # ms-python.python
+        # ms-pyright.pyright
 
         # Haskell
         haskell.haskell
