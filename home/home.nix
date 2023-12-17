@@ -5,7 +5,7 @@
     # editors
     ./editors/codium.nix
     ./editors/nvim
-    # ./editors/helix
+    ./editors/helix
     #./editors/emacs
 
     ./programs/third-party.nix
@@ -19,7 +19,7 @@
   # home config
   home.username = username;
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.11";
 
   programs = {
     bash.enable = true;

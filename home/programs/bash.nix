@@ -21,6 +21,7 @@ in
     entr
     fd
     ripgrep
+    lazygit
 
     # cloud cli
     awscli2
@@ -39,8 +40,17 @@ in
     enable = true; 
     extraConfig = builtins.readFile ./tmux.conf;
     prefix = "C-a";
-    plugins = with pkgs; [
-      tmuxPlugins.resurrect
+     plugins = with pkgs.tmuxPlugins; [
+      resurrect
+      sensible
+      {
+  			plugin = dracula;
+  			extraConfig = ''
+  				set -g @dracula-show-battery false
+  				set -g @dracula-show-powerline true
+  				set -g @dracula-refresh-rate 10
+  			'';
+  		}
     ];
   };
 
@@ -129,12 +139,13 @@ in
         ni = ''
           nix-shell -p nix-info --run "nix-info -m"
         '';
+        lg = "lazygit";
       };
 
       # TODO: These don't get loaded when using a display manager.
       # workaround: Link ~/.profile to ~/.xprofile
       sessionVariables = {
-        EDITOR = "vim";
+        EDITOR = "hx";
         FZF_DEFAULT_OPTS = ''--prompt \" λ \"'';
         TERM = "xterm-256color";
       };

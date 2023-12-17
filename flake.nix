@@ -17,7 +17,7 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          inputs.emacs.overlay
+          # inputs.emacs.overlay
         ];
       };
       system = "x86_64-linux";
