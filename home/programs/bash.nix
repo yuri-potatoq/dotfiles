@@ -40,17 +40,10 @@ in
     enable = true; 
     extraConfig = builtins.readFile ./tmux.conf;
     prefix = "C-a";
-     plugins = with pkgs.tmuxPlugins; [
+    plugins = with pkgs.tmuxPlugins; [
       resurrect
       sensible
-      {
-  			plugin = dracula;
-  			extraConfig = ''
-  				set -g @dracula-show-battery false
-  				set -g @dracula-show-powerline true
-  				set -g @dracula-refresh-rate 10
-  			'';
-  		}
+      dracula
     ];
   };
 

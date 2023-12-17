@@ -4,6 +4,12 @@
   programs.helix = {
     enable = true;
     
+    
+    extraPackages = with pkgs; [
+      nil
+      nodePackages.bash-language-server
+    ];
+    
     settings = {
       keys = {
         normal = {
@@ -29,12 +35,32 @@
       };
     };
 
+    # ref: https://discourse.nixos.org/t/helix-lsp-servers/34833/3
     languages = { 
+      language-server = {
+         nil = {
+          # command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";          
+          command = "nil";
+          config.nil = {
+            # formatting.command = [ "${nixpkgs-fmt}/bin/nixpkgs-fmt" ];          
+            nix.flake.autoEvalInputs = true;
+          };
+        };
+        metals = {
+          command = "metals";
+        };
+      };
       language = [
         { name = "rust"; }
-        { name = "scala"; }
+        { 
+          name = "scala";
+          language-servers = ["metals"];           
+        }
         { name = "go"; }
-        { name = "nix"; }
+        { 
+          name = "nix";
+          language-servers = ["nil"];
+        }
         { name = "python"; }
         { name = "dockerfile"; }
         { name = "gomod"; }
