@@ -95,7 +95,6 @@
 
 ;; lsp utils
 (use-package company)
-;; (use-package flycheck)
 (use-package which-key :config (which-key-mode))
 
 (setq lsp-keymap-prefix "C-c l")

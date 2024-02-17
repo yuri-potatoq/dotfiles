@@ -5,10 +5,10 @@
     homeManager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    emacs = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # emacs = {
+    #   url = "github:nix-community/emacs-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixpkgs, homeManager, ... }@inputs :
@@ -16,9 +16,9 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-          # inputs.emacs.overlay
-        ];
+        # overlays = [
+        #   inputs.emacs.overlay
+        # ];
       };
       system = "x86_64-linux";
       username = "potatoq";

@@ -62,6 +62,10 @@
           language-servers = ["nil"];
         }
         { name = "python"; }
+        { 
+          name = "clojure";
+          language-servers = [ "clojure-lsp" ];
+        } 
         { name = "dockerfile"; }
         { name = "gomod"; }
         { name = "html"; }

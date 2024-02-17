@@ -6,17 +6,35 @@ let
     (load "${./init.el}")
   '';
 
-  customEmacs = pkgs.emacsWithPackagesFromUsePackage {
-    config = ./init.el;
-    alwaysEnsure = true;
-    package = pkgs.emacsUnstable;
-    extraEmacsPackages = epkgs: with epkgs; [ ];
+  customEmacs = pkgs.emacs29.override {
+    withTreeSitter = true;
   };
 in
 {
   programs.emacs = {
     enable = true;
     package = customEmacs;
+    extraPackages = epkgs: with epkgs; [ 
+      # lsp stuff
+      fsharp-mode
+      nix-mode
+      lsp-mode
+      rustic
+      treesit-grammars.with-all-grammars
+      flycheck
+      treemacs
+
+      # theme
+      kaolin-themes
+      
+      # keybinds
+      evil
+      company
+      which-key
+
+      # git
+      magit
+    ];
   };
 
   home.file.".emacs.d/init.el".source = ./init.el;

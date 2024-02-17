@@ -6,7 +6,7 @@
     ./editors/codium.nix
     ./editors/nvim
     ./editors/helix
-    #./editors/emacs
+    ./editors/emacs
 
     ./programs/third-party.nix
     ./programs/podman.nix
