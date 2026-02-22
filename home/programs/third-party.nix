@@ -4,10 +4,10 @@
   home.packages =
     let
       jetbrains-ides = with pkgs.jetbrains; [
-        idea-ultimate
-        rider
-        goland
-        pycharm-professional
+        # idea
+        # rider
+        # goland
+        # pycharm
       ];
     in
     with pkgs; [
@@ -15,11 +15,11 @@
       discord
 
       # misc
-      bitwarden
+      # bitwarden
 
       # browser
-      google-chrome
+      # google-chrome
 
-#      prismlauncher
+      # prismlauncher
     ] ++ jetbrains-ides;
 }

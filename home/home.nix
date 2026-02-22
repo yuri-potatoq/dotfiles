@@ -5,14 +5,18 @@
     # editors
     ./editors/codium.nix
     ./editors/nvim
-    ./editors/helix
-    ./editors/emacs
+    # ./editors/helix
+    #./editors/emacs
 
     ./programs/third-party.nix
     ./programs/podman.nix
 
+    # desktop
+    ./desktop/kde.nix
+
     # cli
-    ./programs/bash.nix
+    #./programs/bash.nix
+    ./programs/fish.nix
     ./programs/git.nix
   ];
 
@@ -28,5 +32,5 @@
   };
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
-  nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nix;
 }
