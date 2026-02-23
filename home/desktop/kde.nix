@@ -66,13 +66,39 @@ in
         run bash "$HOME/.local/share/plasma-manager/run_all.sh"
       fi
 
+      # Wait for plasmashell to flush config after panel script
+      sleep 2
+
       # Fix plasma-manager's double-escaped JSON in sensor config
       # (writeConfig over-escapes quotes in JSON arrays)
       if [ -f "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" ]; then
         run ${pkgs.gnused}/bin/sed -i 's/\\\\"/"/g' "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
       fi
 
-      # Reload plasmashell to pick up the fixed sensor config
+      # Fix panel properties the JS API doesn't apply correctly:
+      # panelOpacity (translucent=2) and panelLengthMode (fill=1, fit=2)
+      if [ -f "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" ] && [ -f "$HOME/.config/plasmashellrc" ]; then
+        bottom_id=$(${pkgs.gawk}/bin/awk -F'[][]' '/^\[Containments\]\[[0-9]+\]$/{id=$4} /^location=4$/{print id}' \
+          "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc")
+        top_id=$(${pkgs.gawk}/bin/awk -F'[][]' '/^\[Containments\]\[[0-9]+\]$/{id=$4} /^location=3$/{print id}' \
+          "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc")
+
+        for panel_id in $bottom_id $top_id; do
+          run kwriteconfig6 --file "$HOME/.config/plasmashellrc" \
+            --group "PlasmaViews" --group "Panel $panel_id" --key "panelOpacity" 2
+        done
+
+        if [ -n "$bottom_id" ]; then
+          run kwriteconfig6 --file "$HOME/.config/plasmashellrc" \
+            --group "PlasmaViews" --group "Panel $bottom_id" --key "panelLengthMode" 2
+        fi
+        if [ -n "$top_id" ]; then
+          run kwriteconfig6 --file "$HOME/.config/plasmashellrc" \
+            --group "PlasmaViews" --group "Panel $top_id" --key "panelLengthMode" 1
+        fi
+      fi
+
+      # Reload plasmashell and kwin to pick up all fixes
       run qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.refreshCurrentShell 2>/dev/null || true
       run qdbus6 org.kde.KWin /KWin reconfigure 2>/dev/null || true
     fi
@@ -110,8 +136,9 @@ in
       {
         location = "bottom";
         floating = true;
-        height = 50;
+        height = 52;
         lengthMode = "fit";
+        opacity = "translucent";
         hiding = "dodgewindows";
         widgets = [
           {
@@ -132,8 +159,27 @@ in
             };
           }
           "org.kde.plasma.marginsseparator"
-          "org.kde.plasma.showdesktop"
+          {
+            systemTray.items = {
+              # Always visible in tray
+              shown = [
+                "org.kde.plasma.battery"
+                "org.kde.plasma.bluetooth"
+                "org.kde.plasma.brightness"
+                "org.kde.plasma.clipboard"
+                "org.kde.plasma.networkmanagement"
+                "org.kde.plasma.volume"
+              ];
+              # Hidden but available (disabled or show when needed)
+              hidden = [
+                "org.kde.plasma.devicenotifier"
+                "org.kde.plasma.notifications"
+                "org.kde.plasma.mediacontroller"
+              ];
+            };
+          }
           "org.kde.plasma.analogclock"
+          "org.kde.plasma.showdesktop"
         ];
       }
 
@@ -143,8 +189,9 @@ in
       {
         location = "top";
         floating = true;
-        height = 32;
-        lengthMode = "fit";
+        height = 54;
+        lengthMode = "fill";
+        opacity = "translucent";
         hiding = "dodgewindows";
         widgets = [
           {
