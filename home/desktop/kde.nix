@@ -36,7 +36,90 @@ in
     pkgs.papirus-icon-theme
     # plasma-manager scripts use "qdbus" but Plasma 6 ships "qdbus6"
     (pkgs.writeShellScriptBin "qdbus" ''exec qdbus6 "$@"'')
+    # Intel GPU monitoring tools
+    pkgs.intel-gpu-tools
+    pkgs.plasma5Packages.plasma-intel-gpu-monitor
+    # Helper script to manage intel-gpu-tools capabilities service
+    (pkgs.writeShellScriptBin "intel-gpu-setup" ''
+      #!/usr/bin/env bash
+      set -e
+
+      SERVICE_FILE="$HOME/.config/systemd-services/intel-gpu-tools-caps.service"
+      SYSTEM_SERVICE="/etc/systemd/system/intel-gpu-tools-caps.service"
+
+      case "''${1:-}" in
+        install)
+          echo "Installing intel-gpu-tools capabilities service..."
+          if [ ! -f "$SERVICE_FILE" ]; then
+            echo "Error: Service file not found at $SERVICE_FILE"
+            echo "Please run 'home-manager switch' first."
+            exit 1
+          fi
+          sudo cp "$SERVICE_FILE" "$SYSTEM_SERVICE"
+          sudo systemctl daemon-reload
+          sudo systemctl enable intel-gpu-tools-caps.service
+          sudo systemctl start intel-gpu-tools-caps.service
+          echo "✓ Service installed and started"
+          echo "✓ Capabilities set on intel_gpu_top"
+          ;;
+        restart)
+          echo "Restarting intel-gpu-tools capabilities service..."
+          sudo cp "$SERVICE_FILE" "$SYSTEM_SERVICE"
+          sudo systemctl daemon-reload
+          sudo systemctl restart intel-gpu-tools-caps.service
+          echo "✓ Service restarted"
+          echo "✓ Capabilities updated"
+          ;;
+        status)
+          echo "Checking intel_gpu_top capabilities..."
+          ${pkgs.libcap}/bin/getcap ${pkgs.intel-gpu-tools}/bin/intel_gpu_top || echo "No capabilities set"
+          echo ""
+          echo "Service status:"
+          systemctl status intel-gpu-tools-caps.service || true
+          ;;
+        uninstall)
+          echo "Uninstalling intel-gpu-tools capabilities service..."
+          sudo systemctl stop intel-gpu-tools-caps.service || true
+          sudo systemctl disable intel-gpu-tools-caps.service || true
+          sudo rm -f "$SYSTEM_SERVICE"
+          sudo systemctl daemon-reload
+          echo "✓ Service uninstalled"
+          ;;
+        *)
+          echo "Intel GPU Monitor Capabilities Setup"
+          echo ""
+          echo "Usage: intel-gpu-setup <command>"
+          echo ""
+          echo "Commands:"
+          echo "  install    - Install and enable the systemd service (run once)"
+          echo "  restart    - Restart service after home-manager rebuild"
+          echo "  status     - Check capabilities and service status"
+          echo "  uninstall  - Remove the systemd service"
+          echo ""
+          echo "Quick start:"
+          echo "  1. intel-gpu-setup install    # Run once to set up"
+          echo "  2. home-manager switch        # After nix updates"
+          echo "  3. intel-gpu-setup restart    # Update capabilities"
+          ;;
+      esac
+    '')
   ];
+
+  # Generate systemd service file for intel-gpu-tools capabilities
+  # This service sets cap_perfmon on intel_gpu_top so the widget works without root
+  home.file.".config/systemd-services/intel-gpu-tools-caps.service".text = ''
+    [Unit]
+    Description=Set capabilities for intel_gpu_top
+    After=local-fs.target
+
+    [Service]
+    Type=oneshot
+    ExecStart=${pkgs.libcap}/bin/setcap cap_perfmon=+ep ${pkgs.intel-gpu-tools}/bin/intel_gpu_top
+    RemainAfterExit=yes
+
+    [Install]
+    WantedBy=multi-user.target
+  '';
 
   # Back up KDE config files before plasma-manager overwrites them
   home.activation.backupKdeConfig = lib.hm.dag.entryBefore [ "configure-plasma" ] ''
@@ -47,6 +130,25 @@ in
              plasma-org.kde.plasma.desktop-appletsrc; do
       [ -f "$HOME/.config/$f" ] && cp "$HOME/.config/$f" "$backup_dir/"
     done
+  '';
+
+  # Inform user about intel-gpu-tools setup
+  home.activation.intelGpuSetupReminder = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -f /etc/systemd/system/intel-gpu-tools-caps.service ]; then
+      echo ""
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo "  Intel GPU Monitor Setup Required"
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo ""
+      echo "  To enable the Intel GPU monitor widget, run:"
+      echo "    intel-gpu-setup install"
+      echo ""
+      echo "  After future nix updates, refresh capabilities with:"
+      echo "    intel-gpu-setup restart"
+      echo ""
+      echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+      echo ""
+    fi
   '';
 
   # Ensure "qdbus" is available since Plasma 6 only ships "qdbus6"
@@ -194,6 +296,7 @@ in
         opacity = "translucent";
         hiding = "dodgewindows";
         widgets = [
+          "org.kde.plasma.intel-gpu-monitor"
           {
             systemMonitor = {
               title = "Network Speed";

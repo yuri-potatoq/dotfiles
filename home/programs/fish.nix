@@ -16,6 +16,7 @@
     tree
     entr
     fd
+    jq
     ripgrep
     lazygit
     # cloud cli
