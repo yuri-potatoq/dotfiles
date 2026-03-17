@@ -5,14 +5,18 @@
     # editors
     ./editors/codium.nix
     ./editors/nvim
-    ./editors/helix
-    ./editors/emacs
+    # ./editors/helix
+    #./editors/emacs
 
     ./programs/third-party.nix
     ./programs/podman.nix
 
+    # desktop
+    ./desktop/kde.nix
+
     # cli
-    ./programs/bash.nix
+    #./programs/bash.nix
+    ./programs/fish.nix
     ./programs/git.nix
   ];
 
@@ -27,6 +31,22 @@
     git.enable = true;
   };
 
-  nix.registry.nixpkgs.flake = inputs.nixpkgs;
-  nix.package = pkgs.nixUnstable;
+  nix = {
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    package = pkgs.nix;
+
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://crane.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCUSeBo="
+        "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
+      ];
+    };
+  };
 }

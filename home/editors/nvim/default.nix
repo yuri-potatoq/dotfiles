@@ -17,10 +17,10 @@
       nodePackages.bash-language-server
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
-      nodePackages.pyright
-      rnix-lsp
+      # nodePackages.pyright
+      # rnix-lsp
       rust-analyzer
-      ocamlPackages.ocaml-lsp
+      # ocamlPackages.ocaml-lsp
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -30,7 +30,7 @@
 
       # lsp
       nvim-lspconfig
-      rust-tools-nvim
+      #rust-tools-nvim
 
       # Completion
       nvim-cmp

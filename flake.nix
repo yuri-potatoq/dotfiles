@@ -5,13 +5,19 @@
     homeManager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "homeManager";
+    };
+
     # emacs = {
     #   url = "github:nix-community/emacs-overlay";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
 
-  outputs = { self, nixpkgs, homeManager, ... }@inputs :
+  outputs = { self, nixpkgs, homeManager, plasma-manager, ... }@inputs :
     let
       pkgs = import nixpkgs {
         inherit system;
@@ -29,6 +35,7 @@
           inherit pkgs;
 
           modules = [
+            plasma-manager.homeModules.plasma-manager
             ./home/home.nix
 
             ({ pkgs, ... }: {
